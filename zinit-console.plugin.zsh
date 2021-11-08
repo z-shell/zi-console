@@ -1,6 +1,6 @@
 #
 # No plugin manager is needed to use this file. All that is needed is adding:
-#   source {where-zplugin-view-is}/zplugin-view.plugin.zsh
+#   source {where-zinit-view-is}/zinit-view.plugin.zsh
 #
 # to ~/.zshrc. But of course, this plugin is an extension to Zplugin.
 #
@@ -14,7 +14,7 @@ typeset -gA Plugins
 Plugins[ZICONSOLE_REPO_DIR]="${0:h}"
 
 if [[ "${+functions[-zui_std_cleanup]}" = "0" ]]; then
-    echo "The zplugin consolette uses ZUI plugin, please load https://github.com/z-shell/zui/ with your plugin manager, or source it."
+    echo "The zinit consolette uses ZUI plugin, please load https://github.com/z-shell/zui/ with your plugin manager, or source it."
 fi
 
 #
@@ -23,7 +23,7 @@ fi
 # 2. Not having fpath already updated (that would equal: using other plugin manager)
 #
 
-if [[ $zsh_loaded_plugins[-1] != */zplugin-console && -z $fpath[(r)${0:h}] ]]
+if [[ $zsh_loaded_plugins[-1] != */zinit-console && -z $fpath[(r)${0:h}] ]]
 then
     fpath+=( "${0:h}" )
 fi
