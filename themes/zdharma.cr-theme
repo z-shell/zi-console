@@ -1,0 +1,113 @@
+# -*- mode: shell-script -*-
+# vim:ft=zsh
+#
+# zdharma
+
+local -A my_ziconsole_theme_data
+my_ziconsole_theme_data=(
+    # Top menu bar
+    menu-bg                 blue
+    menu-active-button-fg   black
+    menu-active-button-bg   green
+    menu2-bg                blue
+    menu2-active-button-fg  black
+    menu2-active-button-bg  green
+    options             bcyan
+    options-text        " Options "
+    debug               bcyan
+    debug-text          " Debug "
+    delete-mode         red
+    delete-mode-text    " Delete Mode "
+    edit-mode           cyan
+    edit-mode-text      " Edit Mode "
+    compact-mode        cyan
+    compact-mode-text   " List Mode "
+
+    ice-list         ""
+    ice-list-text    "{ice}"
+
+    # Main listing
+    index               ""
+    loaded             cyan
+    loaded-text        "ON "
+    loaded-unicode     " ● "
+    unloaded            red
+    unloaded-text       "OFF"
+    unloaded-unicode    " ● "
+    up                  cyan
+    up-text             "U"
+    up-unicode          "↑"
+    down                cyan
+    down-text           "D"
+    down-unicode        "↓"
+    delete              red
+    delete-text         " X"
+    delete-unicode      "⌫  "
+    plus-ice            ""
+    plus-ice-text       "<Ic+>"
+    minus-ice           ""
+    minus-ice-text      "<Ic->"
+    load-time           "green"
+    ms                  "yellow"
+
+    # Snippet item in the main listing
+    s-url               magenta
+    s-marker            cyan
+    s-marker-text       "SN"
+    s-marker-unloaded   red
+    s-marker-unloaded-text "SN"
+    s-as-command        cyan
+    s-force             cyan
+
+    # Plugin item in the main listing
+    p-id                magenta
+    p-marker            yellow
+    p-marker-text       "PL"
+    p-marker-unloaded   red
+    p-marker-unloaded-text "PL"
+    p-mode              bblue:white
+    p-mode-text         "[%s]",light\;"[%s]",normal
+    p-compile           yellow
+    p-compile-text      "compile"
+
+    # Ice enumeration in snippet and plugin items
+    i-indent            ""
+    i-indent-text       "        "
+    #                   proto   from    depth   if      blockf  pick    as      ver     silent svn mv cp atclone atload atpull
+    i-id                magenta:magenta:magenta:magenta:magenta:magenta:magenta:magenta
+    i-unknown           magenta
+    i-unknown-text      "[%s]"
+    i-blockf-text       "[%s]",blockf
+
+    # Preview
+    pv-main-buttons     green
+    pv-comment          cyan
+
+    # Options view
+    o-theme-box         cyan
+    o-switch            cyan
+    o-switch-text       "Switch Theme"
+    o-layout-box        cyan
+    o-switch2           cyan
+    o-switch2-text      "Switch Layout"
+    o-save              cyan
+    o-save-text         "Save"
+
+    # Debug view
+    d-email             yellow:byellow:yellow
+    d-save              cyan
+    d-save-text         " Save "
+
+    # No change to default palette
+    palette-string      "black:red:green:yellow:blue:magenta:cyan:white"
+    logs-palette-string "white:cyan:yellow:green:cyan:red:magenta:yellow:blue"
+    colorpair-string    "white/black"
+    status-cp-string    "white/black"
+
+    # Color of cursor, used when the active button doesn't have background
+    mark                    "red reverse lineund"
+    altmark                 "red reverse" # for terminals not supporting underline
+    # Color used when the button being active has background
+    mark2                   "magenta reverse"
+    altmark2                "magenta reverse" # for terminals not supporting underline
+)

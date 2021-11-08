@@ -1,0 +1,115 @@
+# -*- mode: shell-script -*-
+# vim:ft=zsh
+#
+# zdharma-256
+
+local -A my_ziconsole_theme_data
+my_ziconsole_theme_data=(
+    # Top menu bar
+    menu-bg                 blue
+    menu-active-button-fg   black
+    menu-active-button-bg   green
+    menu2-bg                blue
+    menu2-active-button-fg  black
+    menu2-active-button-bg  green
+    options                 green
+    options-text            " Options "
+    debug                   green
+    debug-text              " Debug "
+    delete-mode             red
+    delete-mode-text        " Delete Mode "
+    edit-mode               cyan
+    edit-mode-text          " Edit Mode "
+    compact-mode            cyan
+    compact-mode-text       " List Mode "
+
+    ice-list             ""
+    ice-list-text        "{ice}"
+
+    # Main listing
+    index                   ""
+    loaded                 cyan
+    loaded-text            "ON "
+    loaded-unicode         " ● "
+    unloaded                red
+    unloaded-text           "OFF"
+    unloaded-unicode        " ● "
+    up                      cyan
+    up-text                 "U"
+    up-unicode              "↑"
+    down                    cyan
+    down-text               "D"
+    down-unicode            "↓"
+    delete                  red
+    delete-text             " X"
+    delete-unicode          "⌫  "
+    plus-ice                "yellow"
+    minus-ice               "yellow"
+    plus-ice-text           "<+I>"
+    minus-ice-text          "<-I>"
+    load-time               "red"
+    ms                      "blue"
+
+    # Snippet item in the main listing
+    s-url                   magenta
+    s-marker                cyan
+    s-marker-text           "SN"
+    s-marker-unloaded       red
+    s-marker-unloaded-text  "SN"
+    s-as-command            cyan
+    s-force                 cyan
+
+    # Plugin item in the main listing
+    p-id                    magenta
+    p-marker                yellow
+    p-marker-text           "PL"
+    p-marker-unloaded       red
+    p-marker-unloaded-text  "PL"
+    p-mode                  bblue:yellow
+    p-mode-text             "[%s]",light\;"[%s]",normal
+    p-compile               yellow
+    p-compile-text          "compile"
+
+    # Ice enumeration in snippet and plugin items
+    i-indent                ""
+    i-indent-text           "        "
+    #                       proto  from   depth  if     blockf pick   as     ver     silent svn mv cp atclone atload atpull
+    i-id                    yellow:yellow:yellow:yellow:yellow:yellow:yellow:yellow
+    i-unknown               yellow
+    i-unknown-text          "[%s]"
+    i-blockf-text           "[%s]",blockf
+
+    # Preview
+    pv-main-buttons         green
+    pv-comment              magenta
+
+    # Options view
+    o-theme-box             cyan
+    o-switch                cyan
+    o-switch-text           "Switch Theme"
+    o-layout-box            cyan
+    o-switch2               cyan
+    o-switch2-text          "Switch Layout"
+    o-save                  cyan
+    o-save-text             "Save"
+
+    # Debug view
+    d-email                 yellow:byellow:yellow
+    d-save                  cyan
+    d-save-text             " Save "
+
+    # Change default palette used by ZUI
+    # original palette:     black:red:gree:yel:bl:magenta:cyan:white
+    palette-string          "black:red:51:146:61:177:cyan:white"
+    # original palette:     white cyan yellow green cyan red magenta yellow blue
+    logs-palette-string     "146:164:146:147:135:red:magenta:153:blue"
+    colorpair-string        "white/black"
+    status-cp-string        "white/black"
+
+    # Color of cursor, used when the active button doesn't have background
+    mark                    "red reverse lineund"
+    altmark                 "red reverse" # for terminals not supporting underline
+    # Color used when the button being active has background
+    mark2                   "magenta reverse"
+    altmark2                "magenta reverse" # for terminals not supporting underline
+)

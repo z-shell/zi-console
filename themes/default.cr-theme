@@ -1,0 +1,113 @@
+# -*- mode: shell-script -*-
+# vim:ft=zsh
+#
+# Crasis default theme
+
+local -A my_ziconsole_theme_data
+my_ziconsole_theme_data=(
+    # Top menu bar
+    menu-bg                 blue
+    menu-active-button-fg   black
+    menu-active-button-bg   green
+    menu2-bg                blue
+    menu2-active-button-fg  black
+    menu2-active-button-bg  green
+    options             bgreen
+    options-text        " Options "
+    debug               bgreen
+    debug-text          "Debug"
+    delete-mode         red
+    delete-mode-text    "Delete Mode"
+    edit-mode           green
+    edit-mode-text      "Edit Mode"
+    compact-mode        green
+    compact-mode-text   "List Mode"
+
+    ice-list         ""
+    ice-list-text    "{ice}"
+
+    # Main listing
+    index               ""
+    loaded             green
+    loaded-text        "Enabled "
+    loaded-unicode     "●"
+    unloaded            red
+    unloaded-text       "DISABLED"
+    unloaded-unicode    "●"
+    up                  yellow
+    up-text             "Up"
+    up-unicode          "↑"
+    down                yellow
+    down-text           "Down"
+    down-unicode        "↓"
+    delete              red
+    delete-text         "[X]"
+    delete-unicode      "X"
+    plus-ice            ""
+    plus-ice-text       "<+ICE>"
+    minus-ice           ""
+    minus-ice-text      "<-ICE>"
+    load-time               "yellow"
+    ms                      "green"
+
+    # Snippet item in the main listing
+    s-url               cyan
+    s-marker            green
+    s-marker-text       "S"
+    s-marker-unloaded   red
+    s-marker-unloaded-text "S"
+    s-as-command        green
+    s-force             green
+
+    # Plugin item in the main listing
+    p-id                cyan
+    p-marker            yellow
+    p-marker-text       "P"
+    p-marker-unloaded   red
+    p-marker-unloaded-text "P"
+    p-mode              yellow:green                        # two colors, for light and load Zplugin subcommands
+    p-mode-text         "Mode: %s",light\;"Mode: %s",normal
+    p-compile           yellow
+    p-compile-text      "Compile"
+
+    # Ice enumeration in snippet and plugin items
+    i-indent            ""
+    i-indent-text       "    "
+    #                   proto  from   depth  if     blockf pick   as     ver     silent svn mv cp atclone atload atpull
+    i-id                yellow:yellow:yellow:yellow:yellow:yellow:yellow:yellow
+    i-unknown           yellow
+    i-unknown-text      "[%s]"
+    i-blockf-text       "[%s]",blockf
+
+    # Preview
+    pv-main-buttons     green
+    pv-comment          magenta
+
+    # Options view
+    o-theme-box         yellow
+    o-switch            yellow
+    o-switch-text       "Switch Theme"
+    o-layout-box        yellow
+    o-switch2           yellow
+    o-switch2-text      "Switch Layout"
+    o-save              yellow
+    o-save-text         "Save"
+
+    # Debug view
+    d-email             yellow:byellow:yellow
+    d-save              yellow
+    d-save-text         "Save"
+
+    # No change to default palette
+    palette-string      "black:red:green:yellow:blue:magenta:cyan:white"
+    logs-palette-string "white:cyan:yellow:green:cyan:red:magenta:yellow:blue"
+    colorpair-string    "white/black"
+    status-cp-string    "white/black"
+
+    # Color of cursor, used when the active button doesn't have background
+    mark                    "red reverse lineund"
+    altmark                 "red reverse" # for terminals not supporting underline
+    # Color used when the button being active has background
+    mark2                   "magenta reverse"
+    altmark2                "magenta reverse" # for terminals not supporting underline
+)

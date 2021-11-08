@@ -1,0 +1,24 @@
+# -*- mode: shell-script -*-
+# vim:ft=zsh:sw=4:sts=4:et
+
+local __ice_line="${ioutput[1]} ${(j: :)ioutput[2,-1]}"
+
+# Snippet in the listing
+
+w_snippet_item_long=(
+    "$num $w_delete $w_unload $smarker_text $w_url $w_load_time ${__ice_line##[[:blank:]]##}"
+)
+
+w_snippet_item_short=(
+    "$num $w_delete $w_unload $smarker_text $w_url $w_ices_list"
+)
+
+# Plugin in the listing
+
+w_plugin_item_long=(
+    "$num $w_delete $w_unload $pmarker_text $w_plugin $w_load_time ${__ice_line##[[:blank:]]##}"
+)
+
+w_plugin_item_short=(
+    "$num $w_delete $w_unload $pmarker_text $w_plugin $w_ices_list"
+)
