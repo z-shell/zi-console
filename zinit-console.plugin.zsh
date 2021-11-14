@@ -2,14 +2,14 @@
 # No plugin manager is needed to use this file. All that is needed is adding:
 #   source {where-zinit-view-is}/zinit-view.plugin.zsh
 #
-# to ~/.zshrc. But of course, this plugin is an extension to Zplugin.
+# to ~/.zshrc. But of course, this plugin is an extension to ZI.
 #
 
 # Standarized $0 handling
 # http://z-shell.github.io/zinit/wiki/zsh-plugin-standard/
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
-
+t
 typeset -gA Plugins
 Plugins[ZICONSOLE_REPO_DIR]="${0:h}"
 
@@ -34,5 +34,3 @@ autoload -- ziconsole zpconsole
 
 zle -N ziconsole
 bindkey "^O^J" ziconsole
-
-# vim:ft=zsh
