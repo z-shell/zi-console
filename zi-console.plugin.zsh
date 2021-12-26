@@ -9,7 +9,7 @@
 # http://z-shell.github.io/zinit/wiki/zsh-plugin-standard/
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
-t
+
 typeset -gA Plugins
 Plugins[ZICONSOLE_REPO_DIR]="${0:h}"
 
