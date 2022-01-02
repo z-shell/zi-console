@@ -1,4 +1,9 @@
-<h1> ZI Console </h1>
+<h2 align="center">
+  <a href="https://github.com/z-shell/zi">
+    <img src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="80" height="80" />
+  </a>
+❮ ZI ❯ - Console
+</h2>
 
 - [Introduction](#introduction)
 - [Usage](#usage)
@@ -8,8 +13,9 @@
 
 # Introduction
 
-A consolette for ZI – based on the `zsh/zcurses` Zshell module and the
-[ZUI](https://github.com/z-shell/zui) library – it allows the user to:
+A consolette for [ZI](https://github.com/z-shell/zi) – based on the `zsh/zcurses` Zshell module allows the user to:
+
+> Prerequisities: [ZUI](https://github.com/z-shell/zui) library
 
 - view the currently loaded plugins in a colorful list, in one of 3 different display modes,
 - unload and load plugins,
