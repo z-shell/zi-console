@@ -11,7 +11,7 @@
 - [Installation](#installation)
   - [Solving The Lack Of `zsh/curses` Module With ZI](#solving-the-lack-of-zshcurses-module-with-zi)
 
-# Introduction
+### Introduction
 
 A consolette for [ZI](https://github.com/z-shell/zi) – based on the `zsh/zcurses` Zshell module allows the user to:
 
@@ -21,7 +21,7 @@ A consolette for [ZI](https://github.com/z-shell/zi) – based on the `zsh/zcurs
 - unload and load plugins,
 - delete the plugins and snippets from the disk.
 
-# Usage
+### Usage
 
 Start the consolette by Ctrl-O Ctrl-J keyboard shortcut, or by running
 `ziconsole` function in the shell. Then, in the consolette:
@@ -40,15 +40,14 @@ Start the consolette by Ctrl-O Ctrl-J keyboard shortcut, or by running
 | `Ctrl-W`           | Delete whole word (in incremental search)                        |
 | `Ctrl-K`           | Delete whole line (in incremental search)                        |
 
-# Screencast
+### Screencast
 
 [![asciicast](https://asciinema.org/a/272994.svg)](https://asciinema.org/a/272994)
 
-# Installation
+### Installation
 
 Load like any other normal plugin, e.g.:, with use of [Turbo
-mode](http://z-shell.github.io/zi/wiki/INTRODUCTION/#turbo_mode_zsh_62_53) and the
-[for-syntax](http://z-shell.github.io/zi/wiki/For-Syntax/):
+mode](https://z-shell.pages.dev/docs/getting_started/overview#turbo-mode-zsh--53) and the [for-syntax](https://z-shell.pages.dev/docs/guides/syntax#the-for-syntax):
 
 ```zsh
 zi wait lucid for z-shell/zi-console
@@ -63,7 +62,7 @@ zmodload zsh/curses
 
 If the call will return an error, then the `zsh/curses` module isn't available.
 
-## Solving The Lack Of `zsh/curses` Module With ZI
+#### Solving The Lack Of `zsh/curses` Module With ZI
 
 You can build the `zsh/curses`-equipped Zshell with ZI by the following
 command:
