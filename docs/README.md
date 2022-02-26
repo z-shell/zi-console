@@ -5,15 +5,12 @@
 ❮ ZI ❯ - Console
 </h2>
 
-- [Introduction](#introduction)
 - [Usage](#usage)
 - [Screencast](#screencast)
 - [Installation](#installation)
   - [Solving The Lack Of `zsh/curses` Module With ZI](#solving-the-lack-of-zshcurses-module-with-zi)
 
-### Introduction
-
-A consolette for [ZI](https://github.com/z-shell/zi) – based on the `zsh/zcurses` Zshell module allows the user to:
+A console for [ZI](https://github.com/z-shell/zi) – based on the `zsh/zcurses` Zshell module allows the user to:
 
 > Prerequisities: [ZUI](https://github.com/z-shell/zui) library
 
