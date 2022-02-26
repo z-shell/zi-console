@@ -5,15 +5,15 @@
 #
 # Copyright (c) 2018 Sebastian Gniazdowski
 
--zui_std_cleanup deserialize:"zinit-console"
--zui_std_init app:"zinit-console" app_name:"Zinit Console"
+-zui_std_cleanup deserialize:"zi-console"
+-zui_std_init app:"zi-console" app_name:"ZI Console"
 emulate -LR zsh -o extendedglob -o typesetsilent -o warncreateglobal -o noshortloops -o rcquotes
 -zui_std_init2
 
 zmodload zsh/curses &>/dev/null || {
     print "ERROR: no zsh/curses module available."
     print "You can build the module yourself by following the instructions at:"
-    print "https://github.com/z-shell/zinit-console#solving-the-lack-of-zshcurses-module-with-zinit"
+    print "https://github.com/z-shell/zi-console#solving-the-lack-of-zshcurses-module-with-zi"
     return 1
 }
 
@@ -41,15 +41,15 @@ ZUI[log_time_format]="[%H:%M] "
 
 # Initial debug message
 /ziconsole-dbg-msg "ZSH version: $ZSH_VERSION ($ZSH_PATCHLEVEL), machine: $CPUTYPE $VENDOR $OSTYPE, LANG: $LANG"
-if [[ ${+ZINIT} = 1 ]]; then
-    /ziconsole-dbg-msg "Zinit version: <ZPLGVERSION>, Zinit-Crasis version: <ZCRVERSION>"
-    /ziconsole-dbg-msg "Zinit BIN_DIR: ${ZINIT[BIN_DIR]/$HOME/~}, HOME_DIR: ${ZINIT[HOME_DIR]/$HOME/~}, PLUGINS_DIR: ${ZINIT[PLUGINS_DIR]/$HOME/~}, COMPLETIONS_DIR: ${ZINIT[COMPLETIONS_DIR]/$HOME/~}"
+if [[ ${+ZI} = 1 ]]; then
+    /ziconsole-dbg-msg "ZI version: <ZIVERSION>, ZI-Crasis version: <ZCRVERSION>"
+    /ziconsole-dbg-msg "ZI BIN_DIR: ${ZI[BIN_DIR]/$HOME/~}, HOME_DIR: ${ZI[HOME_DIR]/$HOME/~}, PLUGINS_DIR: ${ZI[PLUGINS_DIR]/$HOME/~}, COMPLETIONS_DIR: ${ZI[COMPLETIONS_DIR]/$HOME/~}"
 else
-    /ziconsole-dbg-msg "${ZUI[RED]}Zinit not loaded${ZUI[FMT_END]}"
+    /ziconsole-dbg-msg "${ZUI[RED]}ZI not loaded${ZUI[FMT_END]}"
 fi
 
 /ziconsole-dbg-msg ""
-/ziconsole-dbg-msg-arr "Active plugins:" "${ZINIT_REGISTERED_PLUGINS[@]/(#s)/ }"
+/ziconsole-dbg-msg-arr "Active plugins:" "${ZI_REGISTERED_PLUGINS[@]/(#s)/ }"
 /ziconsole-dbg-msg ""
 
 #
@@ -66,7 +66,7 @@ ice_order=(
     \!csh aliases
     # Include all additional ices – after
     # stripping them from the possible: ''
-    ${(@s.|.)${ZINIT_EXTS[ice-mods]//\'\'/}}
+    ${(@s.|.)${ZI_EXTS[ice-mods]//\'\'/}}
 )
 nval_ices=(
         blockf silent lucid trackbinds cloneonly nocd run-atpull
@@ -76,7 +76,7 @@ nval_ices=(
         # Include only those additional ices,
         # don't have the '' in their name, i.e.
         # aren't designed to hold value
-        ${(@)${(@s.|.)ZINIT_EXTS[ice-mods]}:#*\'\'*}
+        ${(@)${(@s.|.)ZI_EXTS[ice-mods]}:#*\'\'*}
 
         # Must be last
         svn
@@ -103,7 +103,7 @@ typeset -ga reply
 # Load and process theme
 #
 
-local ZPCONSOLE_THEME="$ZPCONSOLE_THEME" ZPCONSOLE_LAYOUT="$ZPCONSOLE_LAYOUT"
+local ZICONSOLE_THEME="$ZICONSOLE_THEME" ZICONSOLE_LAYOUT="$ZICONSOLE_LAYOUT"
 
 local -a thcol_entries thcol_entries2 thbcol_entries thtxt_entries thtxt_entries2
 thcol_entries=(
@@ -163,9 +163,9 @@ function .ziconsole-process-theme() {
 
     [[ -f "$Plugins[ZICONSOLE_REPO_DIR]/ziconsole.conf" ]] && {
         source "$Plugins[ZICONSOLE_REPO_DIR]/ziconsole.conf"
-        # Global and from-interface $ZPCONSOLE_THEME overrides configuration file
-        ZPCONSOLE_THEME=${ZPCONSOLE_THEME:-$theme_name}
-        ZPCONSOLE_LAYOUT=${ZPCONSOLE_LAYOUT:-$layout_name}
+        # Global and from-interface $ZICONSOLE_THEME overrides configuration file
+        ZICONSOLE_THEME=${ZICONSOLE_THEME:-$theme_name}
+        ZICONSOLE_LAYOUT=${ZICONSOLE_LAYOUT:-$layout_name}
         # For unicode glyphs, respect configuration file only at start
         theme_save[lu-unicode-bool]="${theme_save[lu-unicode-bool]:-$toggle_unicode_buttons}"
         theme_save[delete-unicode-bool]="${theme_save[delete-unicode-bool]:-$delete_unicode_button}"
@@ -178,21 +178,21 @@ function .ziconsole-process-theme() {
     [[ "${theme[delete-unicode-bool]}" != [0-1] ]] && theme[delete-unicode-bool]=1
 
     # Fallback path for theme name
-    [[ ! -f "$Plugins[ZICONSOLE_REPO_DIR]/themes/${ZPCONSOLE_THEME}.cr-theme" ]] && {
-        -zui_std_stalog "No such theme: " "$ZPCONSOLE_THEME," "" " reverted to default"
-        ZPCONSOLE_THEME="default"
+    [[ ! -f "$Plugins[ZICONSOLE_REPO_DIR]/themes/${ZICONSOLE_THEME}.cr-theme" ]] && {
+        -zui_std_stalog "No such theme: " "$ZICONSOLE_THEME," "" " reverted to default"
+        ZICONSOLE_THEME="default"
 
-        [[ ! -f "$Plugins[ZICONSOLE_REPO_DIR]/themes/${ZPCONSOLE_THEME}.cr-theme" ]] && {
-            print "Couldn't find theme \`$ZPCONSOLE_THEME', have to abort.."
-            print "Looked for file: $Plugins[ZICONSOLE_REPO_DIR]/themes/${ZPCONSOLE_THEME}.cr-theme"
+        [[ ! -f "$Plugins[ZICONSOLE_REPO_DIR]/themes/${ZICONSOLE_THEME}.cr-theme" ]] && {
+            print "Couldn't find theme \`$ZICONSOLE_THEME', have to abort.."
+            print "Looked for file: $Plugins[ZICONSOLE_REPO_DIR]/themes/${ZICONSOLE_THEME}.cr-theme"
             return 1
         }
     }
 
-    source "$Plugins[ZICONSOLE_REPO_DIR]/themes/${ZPCONSOLE_THEME}.cr-theme"
+    source "$Plugins[ZICONSOLE_REPO_DIR]/themes/${ZICONSOLE_THEME}.cr-theme"
     theme+=( "${(kv)my_ziconsole_theme_data[@]}" )
     theme[i-blockf]="${${(s;:;)theme[i-id]}[5]}"
-    theme[layout]="$(<$Plugins[ZICONSOLE_REPO_DIR]/layouts/$ZPCONSOLE_LAYOUT.cr-layout)"
+    theme[layout]="$(<$Plugins[ZICONSOLE_REPO_DIR]/layouts/$ZICONSOLE_LAYOUT.cr-layout)"
 
     # Stats on color settings
     local -a provided missing
@@ -306,7 +306,7 @@ function .ziconsole-process-theme() {
     } || theme[i-unknown-text-c]="$theme[i-unknown-text]"
 
     /ziconsole-dbg-msg-arr "Theme processing time: $SECONDS seconds" ""
-    -zui_std_stalog "Loaded theme \`$ZPCONSOLE_THEME' and layout \`$ZPCONSOLE_LAYOUT'"
+    -zui_std_stalog "Loaded theme \`$ZICONSOLE_THEME' and layout \`$ZICONSOLE_LAYOUT'"
 
     return 0
 }
@@ -360,7 +360,7 @@ function .ziconsole-set-zui-settings() {
 # $1 - theme name (not path, no .cr-theme extension)
 .ziconsole-switch-theme() {
     -zui_std_strip_color_codes "$1"
-    ZPCONSOLE_THEME="$REPLY"
+    ZICONSOLE_THEME="$REPLY"
     .ziconsole-process-theme
     .ziconsole-set-zui-settings
 }
@@ -372,7 +372,7 @@ function .ziconsole-set-zui-settings() {
 # $1 - layout name (not path, no .cr-theme extension)
 .ziconsole-switch-layout() {
     -zui_std_strip_color_codes "$1"
-    ZPCONSOLE_LAYOUT="$REPLY"
+    ZICONSOLE_LAYOUT="$REPLY"
     .ziconsole-process-theme
     .ziconsole-set-zui-settings
 }
@@ -382,8 +382,8 @@ function .ziconsole-set-zui-settings() {
 # Outputs status message.
 .ziconsole-action-save-options() {
     local out="$Plugins[ZICONSOLE_REPO_DIR]/ziconsole.conf"
-    print -r -- "local theme_name=${ZPCONSOLE_THEME}   # Name of active theme. \$ZPCONSOLE_THEME overrides." >| "$out"
-    print -r -- "local layout_name=${ZPCONSOLE_LAYOUT}  # Name of active layout. \$ZPCONSOLE_LAYOUT overrides." >>| "$out"
+    print -r -- "local theme_name=${ZICONSOLE_THEME}   # Name of active theme. \$ZICONSOLE_THEME overrides." >| "$out"
+    print -r -- "local layout_name=${ZICONSOLE_LAYOUT}  # Name of active layout. \$ZICONSOLE_LAYOUT overrides." >>| "$out"
     print -r -- "local toggle_unicode_buttons=${theme[lu-unicode-bool]} # Use unicode glyphs for enable & disable buttons?" >>| "$out"
     print -r -- "local delete_unicode_button=${theme[delete-unicode-bool]}  # Use unicode glyphs for disable button?" >>| "$out"
     -zui_std_stalog "Configuration saved to: " "$out"
@@ -441,12 +441,12 @@ function .ziconsole-set-zui-settings() {
         lines=( "${(f@)zshrc}" )
         ZCR_DEBUG_MSGS=( "${ZCR_DEBUG_MSGS[@]/<ZSHRCLINES>/${#lines}}" )
 
-        { local ver="$(<${ZINIT[BIN_DIR]}/.git/refs/heads/master)" } 2>/dev/null
-        [[ -z "$ver" ]] && ver="unknown (no .git/refs/heads/master)" || ver="${ver[1,7]}"
-        ZCR_DEBUG_MSGS=( "${ZCR_DEBUG_MSGS[@]/<ZPLGVERSION>/$ver}" )
+        { local ver="$(<${ZI[BIN_DIR]}/.git/refs/heads/main)" } 2>/dev/null
+        [[ -z "$ver" ]] && ver="unknown (no .git/refs/heads/main)" || ver="${ver[1,7]}"
+        ZCR_DEBUG_MSGS=( "${ZCR_DEBUG_MSGS[@]/<ZIVERSION>/$ver}" )
 
-        { local ver="$(<${ZINIT[PLUGINS_DIR]}/z-shell---zinit-console/.git/refs/heads/master)" } 2>/dev/null
-        [[ -z "$ver" ]] && ver="unknown (no .git/refs/heads/master)" || ver="${ver[1,7]}"
+        { local ver="$(<${ZI[PLUGINS_DIR]}/z-shell---zi-console/.git/refs/heads/main)" } 2>/dev/null
+        [[ -z "$ver" ]] && ver="unknown (no .git/refs/heads/main)" || ver="${ver[1,7]}"
         ZCR_DEBUG_MSGS=( "${ZCR_DEBUG_MSGS[@]/<ZCRVERSION>/$ver}" )
     else
         -zui_std_set_mod_factor 2 ${#ENTRIES}
@@ -476,12 +476,12 @@ function .ziconsole-set-zui-settings() {
     local id_as="${${entry#TIME_[0-9]##_}//---//}" teleid
 
     local -a tmp object_ices
-    tmp=( "${(z@)ZINIT_SICE[$id_as]}" )
+    tmp=( "${(z@)ZI_SICE[$id_as]}" )
     (( ${#tmp[@]} > 1 && ${#tmp[@]} % 2 == 0 )) && object_ices=( "${(Q)tmp[@]}" )
 
     teleid="${object_ices[teleid]}"
 
-    zinit delete -y -q "$id_as"
+    zi delete -y -q "$id_as"
     -zui_std_stalog "" "" "" "Deleted the plugin/snippet $id_as from the disk"
 
     reply=( "" "" )
@@ -625,11 +625,11 @@ function .ziconsole-set-zui-settings() {
     local id_as="${${entry#TIME_[0-9]##_}//---//}" teleid
 
     local -a tmp
-    tmp=( "${(z@)ZINIT_SICE[$id_as]}" )
+    tmp=( "${(z@)ZI_SICE[$id_as]}" )
     (( ${#tmp[@]} > 1 && ${#tmp[@]} % 2 == 0 )) && object_ices=( "${(Q)tmp[@]}" )
 
     teleid="${object_ices[teleid]}"
-    local w_load_time="${ZINIT[$entry]}"
+    local w_load_time="${ZI[$entry]}"
     w_load_time="$theme[load-time]${(l:3:: :)$(( w_load_time * 1000 ))%.*}${ZUI[FMT_END]} $theme[ms]ms${ZUI[FMT_END]}"
 
     if [[ "$teleid" = (http|https|ftp|ftps|scp|OMZ|PZT):* ]]; then
@@ -639,10 +639,10 @@ function .ziconsole-set-zui-settings() {
 
         object_data=( tpe "snippet" arg "$id_as" teleid "$URL"  unloaded -1 )
     else
-        .zinit-any-to-user-plugin "$teleid"
+        .zi-any-to-user-plugin "$teleid"
         user="${reply[-2]}" plugin="${reply[-1]}"
         object_data=( tpe "plugin" arg "$id_as" teleid "$teleid"  unloaded 0 user "$user" plugin "$plugin" )
-        (( !${ZINIT_REGISTERED_PLUGINS[(I)$id_as]} )) && object_data[unloaded]=1
+        (( !${ZI_REGISTERED_PLUGINS[(I)$id_as]} )) && object_data[unloaded]=1
     fi
 
     output=()
@@ -667,13 +667,13 @@ function .ziconsole-set-zui-settings() {
 
     -zui_std_button "toggle_unld_${mod}_${ice}" "$unloaded_text" \
         "(( ${object_data[unloaded]} )) && {
-                ZINIT_ICES=( ${(j: :)${(@qkv)object_ices[@]}} )
-                unset 'ZINIT_ICES[wait]'
-                zinit load \"${object_data[arg]}\" &>/dev/null "'
+                ZI_ICES=( ${(j: :)${(@qkv)object_ices[@]}} )
+                unset 'ZI_ICES[wait]'
+                zi load \"${object_data[arg]}\" &>/dev/null "'
                 -zui_std_stalog "" "" "" "Loaded the plugin."
                 ((1))
             } || {'"
-                zinit unload \"${object_data[arg]}\" &>/dev/null"'
+                zi unload \"${object_data[arg]}\" &>/dev/null"'
                 -zui_std_stalog "Unloaded the plugin." " It''s report stored into" "" " \$LASTREPORT"
             }'"
             -zui_std_fly_mod_regen \""$mod"\" \""$ice"\"; internal=1" \
@@ -701,7 +701,7 @@ function .ziconsole-set-zui-settings() {
     local -a ioutput
     local value cand1 cand2
     integer index=0
-    # Something more than [c]=zinit [sub]=ice [comment]=comment
+    # Something more than [c]=zi [sub]=ice [comment]=comment
     (( ${#object_ices} > 0 )) && {
         # TODO ioutput=( "${theme[i-indent-text-c]-    }" )
         for t in "${ice_order[@]}"; do
@@ -789,14 +789,14 @@ function .ziconsole-set-zui-settings() {
 
     # Switch theme list box
     (( ${+ZUI[my_lbox4_width]} == 0 )) && ZUI[my_lbox4_width]=18
-    ZUI[my_lbox4_idx]=${tnames[(i)$ZPCONSOLE_THEME]}
+    ZUI[my_lbox4_idx]=${tnames[(i)$ZICONSOLE_THEME]}
     eval "ZUI[my_lbox4_opts]=\"$theme[o-theme-box]\${(j:${ZUI[FMT_END]};${theme[o-theme-box]}:)tnames}${ZUI[FMT_END]}\""
     noglob -zui_std_list_box "lbox4_$mod" ZUI[my_lbox4_width] ZUI[my_lbox4_idx] ZUI[my_lbox4_opts] "" "" "" ''
     -zui_std_button "switch_theme" "$theme[o-switch-text-c]" 'ZUI[my_rerender]=1; .ziconsole-switch-theme "${${(s:;:)ZUI[my_lbox4_opts]}[${ZUI[my_lbox4_idx]}]}"; reply=( ",all," "" );'
 
     # Switch layout list box
     (( ${+ZUI[my_lbox8_width]} == 0 )) && ZUI[my_lbox8_width]=18
-    ZUI[my_lbox8_idx]=${lnames[(i)$ZPCONSOLE_LAYOUT]}
+    ZUI[my_lbox8_idx]=${lnames[(i)$ZICONSOLE_LAYOUT]}
     eval "ZUI[my_lbox8_opts]=\"$theme[o-layout-box]\${(j:${ZUI[FMT_END]};${theme[o-layout-box]}:)lnames}${ZUI[FMT_END]}\""
     noglob -zui_std_list_box "lbox8_$mod" ZUI[my_lbox8_width] ZUI[my_lbox8_idx] ZUI[my_lbox8_opts] "" "" "" ''
     -zui_std_button "switch_layout" "$theme[o-switch2-text-c]" 'ZUI[my_rerender]=1; .ziconsole-switch-layout "${${(s:;:)ZUI[my_lbox8_opts]}[${ZUI[my_lbox8_idx]}]}"; reply=( ",all," "" );'
@@ -862,7 +862,7 @@ function .ziconsole-set-zui-settings() {
 # }}}
 
 local -a ENTRIES
-ENTRIES=( "${(@on)ZINIT[(I)TIME_[0-9]##_*]}" )
+ENTRIES=( "${(@on)ZI[(I)TIME_[0-9]##_*]}" )
 
 # Create needed local parameters
 integer i
